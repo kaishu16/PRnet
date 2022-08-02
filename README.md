@@ -9,15 +9,15 @@
 
 入力画像が60x128x256x3(30fpsで　2秒分のフレーム画像群)なのですが動画が25fpsだったので2秒分の50x128x256x3にしています。
 
-Loss: MSE loss
-optimizer: Adam
+- Loss: MSE loss
+- optimizer: Adam
 
 ![image](https://user-images.githubusercontent.com/43696731/182303896-ec3b10b1-ccda-45c4-aabb-1f00ada5b777.png)
 ![スクリーンショット 2022-08-02 12 59 48](https://user-images.githubusercontent.com/43696731/182303792-550c965f-dd13-4d82-bd42-7423778b156c.png)
 
 論文に基づき
-各Conv層の後にBatchNormalizationを設置
-各ConvおよびLSTM層の後にLeaky ReLUを設置
+- 各Conv層の後にBatchNormalizationを設置
+- 各ConvおよびLSTM層の後にLeaky ReLUを設置
 
 
 ## dataset.py
