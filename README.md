@@ -3,6 +3,12 @@
 参考論文
 [1-s2.0-S1746809420304936-main.pdf](https://github.com/kaishu16/PRnet/files/9241286/1-s2.0-S1746809420304936-main.pdf)
 
+## データセット
+
+![image](https://user-images.githubusercontent.com/43696731/182383553-5fed908e-c282-428a-a411-bd2ce46b183d.png)
+
+上記画像の頬部分のバウンディングボックスを切り取った画像を用意
+
 
 ## model.py
 以下のモデルを参考に作成
