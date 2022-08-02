@@ -13,15 +13,27 @@
 ![スクリーンショット 2022-08-02 12 59 48](https://user-images.githubusercontent.com/43696731/182303792-550c965f-dd13-4d82-bd42-7423778b156c.png)
 
 
+## dataset.py
+data.pyで振り分けたtrainとtestのデータから学習(テスト)動画像データと正解ラベル(心拍)を引っ張ってきてtensor型にしてGPUで学習できるような状態、Dataloaderの引数として代入している。
+
+## data.py
+trainとtestのフォルダにtest.pyで作成したデータを振り分ける
+
+## test.py
+学習とテストで使用するデータ(頬部分のboundingboxを切り取った50x128x256x3の画像)とラベルデータ(2秒間の心拍平均)をVIPL-HRデータセットから作成
+
+
 # 現状の課題
 
-30エポック
-1から10 learning rate 1e-3
-11から20 learning rate 1e-4
-21から30 learning rate 1e-5
+epoch数
+
+- 1から10 learning rate 1e-3
+- 11から20 learning rate 1e-4
+- 21から30 learning rate 1e-5
+
 の条件で学習した際、
 
-問題点
+## 問題点
 - lossは減って収束に向かっているが、2桁3桁になることがずっとある。
 - 予測値が一定値になってしまい、正解値に全然対応していてない。
 
