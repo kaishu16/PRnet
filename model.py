@@ -27,41 +27,6 @@ import pandas as pd
 from dataset import DataLoader
 import time
 
-
-def array_to_color(array, cmap="Oranges"):
-    s_m = plt.cm.ScalarMappable(cmap=cmap)
-    return s_m.to_rgba(array)[:,:-1]
-
-
-# def rgb_data_transform(data):
-#     data_t = []
-#     for i in range(data.shape[0]):
-#         data_t.append(array_to_color(data[i]).reshape(16, 16, 16, 3))
-#     return np.asarray(data_t, dtype=np.float32)
-
-
-# with h5py.File("./full_dataset_vectors.h5", "r") as hf:    
-
-#     # Split the data into training/test features/targets
-#     X_train = hf["X_train"][:]
-#     targets_train = hf["y_train"][:]
-#     X_test = hf["X_test"][:] 
-#     targets_test = hf["y_test"][:]
-
-#     # Determine sample shape
-#     sample_shape = (16, 16, 16, 3)
-
-#     # Reshape data into 3D format
-#     X_train = rgb_data_transform(X_train)
-#     X_test = rgb_data_transform(X_test)
-
-#     # Convert target vectors to categorical targets
-#     #targets_train = to_categorical(targets_train).astype(np.integer)
-#     #targets_test = to_categorical(targets_test).astype(np.integer)
-
-
-
-
 # Create CNN Model
 
 
@@ -169,51 +134,7 @@ def get_data_path(frame_paths):
         data_path.append(path)
         
     return data_path
-        # print('pass2')  
-        # array = np.load(frame_file)
-        # print(array.shape)
-        # array = array.transpose(0, 1, 4, 2, 3)
-        # print(array.shape)
-        # array_GPU = cp.asarray(array)
-        # print('pass3')
-        # if num == 0:
-        #     print('pass4.1')
-        #     input_data = array
-        #     print('pass4.2')
-        # else:    
-        #     print('pass4.1')
-        #     input_data_GPU = cp.asarray(input_data)
-        #     append_array_GPU = cp.append(input_data_GPU, array_GPU, axis=0)
-        #     input_data = append_array_GPU.get()
-        #     print('pass4.2')
-        
-        # print('pass2')  
-        # array = np.load(frame_file)
-        # print('pass3')
-        # if num == 0:
-        #     print('pass4.1')
-        #     input_data = array
-        #     print('pass4.2')
-        # else:    
-        #     print('pass4.1')
-        #     input_data = np.append(input_data, array, axis=0)
-        #     print('pass4.2')
-            
-        # df = pd.read_csv(hr_file, header=None)
-        # hrs = df[0]
-        # for num in range(len(hrs)):
-        #     target_arr.append(hrs[num])
-        
-        # num = num + 1
-        
-    # input_data = input_data
-    # label_data = np.array(target_arr)    
-    
-    # print(input_data.shape)
-    # print(label_data.shape)
-    
-    # return input_data, label_data
-    
+
 def sortNum(text):
     split_arr = text.split('.')
     num = split_arr[0].split('_')[-1]
@@ -246,38 +167,10 @@ if __name__ == '__main__':
     # print(torch.cuda.is_available)
     
     train_paths = sorted(glob.glob('data/train/*'), key=sortNum)
-    # train_paths2 = glob.glob('data/p[1-9][0-9]/v*/source3')
-    
-    # for path in train_paths2:
-    #     train_paths.append(path)
-
-    # print(len(train_paths))
-    
-    # train_paths = get_data_path(train_paths)
     
     test_paths = sorted(glob.glob('data/test/*'), key=sortNum)
-        
-    # test_paths = get_data_path(test_paths)
-    
-    # print(len(test_paths))
-
-    # train_x = torch.from_numpy(X_train).float()
-    # train_y = torch.from_numpy(targets_train).float()
-    # test_x = torch.from_numpy(X_test).float()
-    # test_y = torch.from_numpy(targets_test).float()
 
     batch_size = 8 #We pick beforehand a batch_size that we will use for the training
-    
-    # train_x = train_x.to('cuda:3')
-    # train_y = train_y.to('cuda:3')
-    # test_x = test_x.to('cuda:3')
-    # test_y = test_y.to('cuda:3')
-    
-
-
-    # Pytorch train and test sets
-    # train = torch.utils.data.TensorDataset(train_x,train_y)
-    # test = torch.utils.data.TensorDataset(test_x,test_y)
     
     train_set = DataLoader(train_paths, 'train')
     test_set = DataLoader(test_paths, 'test')
@@ -287,14 +180,7 @@ if __name__ == '__main__':
     test_loader = torch.utils.data.DataLoader(dataset=test_set, batch_size = batch_size, shuffle = False)
     
     print('success')
-    # for data,label in test_loader:
-    #         break
-    # print(data)
-    # print(label)    
-    # #Definition of hyperparameters
-    # # n_iters = 3936
-    # # num_epochs = n_iters / (len(train_x) / batch_size)
-    # # num_epochs = int(num_epochs)
+
     num_epochs = 30
 
     # Create CNN
